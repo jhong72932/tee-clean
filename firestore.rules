@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Internal kiosk app — no auth, open read/write to the units collection
+    // used by the Auto Tee service tracker.
+    match /units/{unitId} {
+      allow read, write: if true;
+    }
+  }
+}
